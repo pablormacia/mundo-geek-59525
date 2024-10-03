@@ -1,0 +1,37 @@
+[
+    {
+        "id":1,
+        "title":"Gadgets",
+        "image":"https://i.postimg.cc/QCfcGMJw/gadget.png"
+    },
+    {
+        "id":2,
+        "title":"Consolas",
+        "image":"https://i.postimg.cc/MTby55MW/consolas.png"
+    },
+    {
+        "id":3,
+        "title":"Comics",
+        "image":"https://i.postimg.cc/RhSwDtKw/comics.png"
+    },
+    {
+        "id":4,
+        "title":"Coleccionables",
+        "image":"https://i.postimg.cc/RFz7wy0s/coleccionables.png"
+    },
+    {
+        "id":5,
+        "title":"Hardware",
+        "image":"https://i.postimg.cc/hvs1DscC/arduino.png"
+    },
+    {
+        "id":6,
+        "title":"Ropa&Accesorios",
+        "image":"https://i.postimg.cc/9Q6ZjKym/remeras.png"
+    },
+    {
+        "id":7,
+        "title":"Eventos",
+        "image":"https://i.postimg.cc/zfTWD7kn/ticket.png"
+    }
+]
