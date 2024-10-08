@@ -13,7 +13,7 @@ export default FlatCard
 
 const styles = StyleSheet.create({
     cardContainer:{
-        backgroundColor: colors.grisMedio,
+        backgroundColor: colors.grisClaro,
         shadowColor: colors.negro,
         shadowOpacity:1,
         shadowRadius:1,

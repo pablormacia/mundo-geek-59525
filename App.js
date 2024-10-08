@@ -5,7 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import CategoriesScreen from './src/screens/CategoriesScreen';
 import ProductsScreen from './src/screens/ProductsScreen';
 import Header from './src/components/Header';
-import {useEffect} from 'react'
+import {useEffect,useState} from 'react'
 
 SplashScreen.preventAutoHideAsync();
 
@@ -14,6 +14,9 @@ export default function App() {
     'Montserrat': require('./assets/fonts/Montserrat-Variable.ttf'),
     'PressStart2P': require('./assets/fonts/PressStart2P-Static.ttf')
   });
+
+  const [category, setCategory] = useState("")
+  //console.log(category)
 
   useEffect(() => {
     if (loaded || error) {
@@ -28,7 +31,13 @@ export default function App() {
   return (
     <>
       <Header />
-      <ProductsScreen />
+      {
+        category
+        ?
+        <ProductsScreen category={category} setCategory={setCategory}/>
+        :
+        <CategoriesScreen setCategory={setCategory}  />
+      }
       <StatusBar style="light" />
     </>
   );
