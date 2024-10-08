@@ -28,13 +28,11 @@ const CategoriesScreen = () => {
 
 
     return (
-        <View style={styles.categoriesContainer}>
             <FlatList
                 data={categories}
                 keyExtractor={item=>item.id}
                 renderItem={renderCategoryItem}
             />
-        </View>
     )
 }
 
