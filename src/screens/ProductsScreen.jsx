@@ -3,18 +3,26 @@ import { FlatList, StyleSheet, Text, View, Image,Pressable } from 'react-native'
 import products from '../data/products.json'
 import FlatCard from '../components/FlatCard'
 import { colors } from '../global/colors'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import Search from '../components/Search'
 
-
-const ProductsScreen = ({ category,setCategory }) => {
+const ProductsScreen = ({ category,setCategory,setProductId }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
+    const [search,setSearch] = useState("")
+    //console.log(search)
 
     useEffect(()=>{
         const productsTempFiltered = products.filter(product=>product.category.toLowerCase() === category.toLowerCase())
         setProductsFiltered(productsTempFiltered)
-    },[category])
+        if(search){
+            const productsTempSearched = productsTempFiltered.filter(product=>product.title.toLowerCase().includes(search.toLowerCase()))
+            setProductsFiltered(productsTempSearched)
+        }
+    },[category,search])
 
     const renderProductItem = ({ item }) => {
         return (
+            <Pressable onPress={()=>setProductId(item.id)}>
             <FlatCard style={styles.productContainer}>
                 <View>
                     <Image
@@ -46,6 +54,7 @@ const ProductsScreen = ({ category,setCategory }) => {
                     <Text style={styles.price}>Precio: $ {item.price}</Text>
                 </View>
             </FlatCard>
+            </Pressable>
         )
     }
 
@@ -54,7 +63,8 @@ const ProductsScreen = ({ category,setCategory }) => {
 
     return (
         <>
-        <Pressable onPress={()=>setCategory("")}><Text>Volver</Text></Pressable>
+        <Pressable onPress={()=>setCategory("")}><Icon style={styles.goBack} name="arrow-back-ios" size={24} /></Pressable>
+        <Search setSearch={setSearch} />
         <FlatList
             data={productsFiltered}
             keyExtractor={item => item.id}
@@ -118,5 +128,9 @@ const styles = StyleSheet.create({
     },
     noStockText: {
         color: 'red'
+    },
+    goBack:{
+        padding:10,
+        color:colors.grisMedio
     }
 })

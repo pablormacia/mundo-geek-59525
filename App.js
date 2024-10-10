@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import CategoriesScreen from './src/screens/CategoriesScreen';
 import ProductsScreen from './src/screens/ProductsScreen';
+import ProductScreen from './src/screens/ProductScreen';
 import Header from './src/components/Header';
 import {useEffect,useState} from 'react'
 
@@ -16,6 +17,7 @@ export default function App() {
   });
 
   const [category, setCategory] = useState("")
+  const [productId, setProductId] = useState(null)
   //console.log(category)
 
   useEffect(() => {
@@ -32,9 +34,13 @@ export default function App() {
     <>
       <Header />
       {
+        productId
+        ?
+        <ProductScreen productId={productId} setProductId={setProductId}/>
+        :
         category
         ?
-        <ProductsScreen category={category} setCategory={setCategory}/>
+        <ProductsScreen category={category} setCategory={setCategory} setProductId={setProductId}/>
         :
         <CategoriesScreen setCategory={setCategory}  />
       }
