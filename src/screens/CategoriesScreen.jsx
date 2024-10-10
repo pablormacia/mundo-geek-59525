@@ -1,9 +1,24 @@
-import { StyleSheet, Text, View, FlatList, Image,Pressable } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image,Pressable,useWindowDimensions } from 'react-native'
 import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
+import {useEffect,useState} from 'react'
 
 const CategoriesScreen = ({setCategory}) => {
     //console.log("Categories: ", categories)
+    const {width,height} = useWindowDimensions()
+    const [isPortrait, setIsPortrait] = useState(true)
+    console.log(width,height)
+
+    useEffect(()=>{
+        if(width>height){
+            setIsPortrait(false)
+        }else{
+            setIsPortrait(true)
+        }
+    },
+    [width,height])
+
+    console.log(isPortrait)
 
     const renderCategoryItem = ({ item, index }) => {
         //console.log(item)
@@ -22,7 +37,7 @@ const CategoriesScreen = ({setCategory}) => {
                         style={styles.image}
                         resizeMode='contain'
                     />
-                    <Text style={styles.categoryTitle}>{item.title}</Text>
+                    <Text style={width>400?styles.categoryTitle:stylesSmall.categoryTitle}>{item.title}</Text>
                 </FlatCard>
             </Pressable>
         )
@@ -41,7 +56,6 @@ const CategoriesScreen = ({setCategory}) => {
 export default CategoriesScreen
 
 const styles = StyleSheet.create({
-
     categoryItemContainer: {
         justifyContent: "space-between",
         alignItems: "center",
@@ -51,6 +65,10 @@ const styles = StyleSheet.create({
     },
     categoryTitle: {
         fontSize: 24,
+        fontWeight: "bold",
+    },
+    categoryTitleSmall:{
+        fontSize: 12,
         fontWeight: "bold",
     },
     image: {
@@ -64,3 +82,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row-reverse'
     }
 })
+
+
