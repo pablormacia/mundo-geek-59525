@@ -3,11 +3,12 @@ import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 import {useEffect,useState} from 'react'
 
-const CategoriesScreen = ({setCategory}) => {
+const CategoriesScreen = ({navigation}) => {
     //console.log("Categories: ", categories)
     const {width,height} = useWindowDimensions()
     const [isPortrait, setIsPortrait] = useState(true)
-    console.log(width,height)
+    //console.log(width,height)
+    //console.log(navigation)
 
     useEffect(()=>{
         if(width>height){
@@ -23,7 +24,7 @@ const CategoriesScreen = ({setCategory}) => {
     const renderCategoryItem = ({ item, index }) => {
         //console.log(item)
         return (
-            <Pressable onPress={()=>setCategory(item.title)}>
+            <Pressable onPress={()=>navigation.navigate('Productos', item.title)}>
                 <FlatCard style={
                     //Uso de operador ternario condicion?si verdadero:si falso
                     index % 2 == 0
