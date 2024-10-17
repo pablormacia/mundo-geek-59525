@@ -1,0 +1,72 @@
+[
+  {
+    "id": 2,
+    "userId": 2,
+    "createdAt": 1728843630000,
+    "items": [
+      {
+        "id": 2,
+        "title": "Play Station 4",
+        "shortDescription": "Juegos increíbles y entretenimiento sin fin con PS4.",
+        "longDescription": "La PlayStation 4 ofrece gráficos espectaculares, experiencias de juego inmersivas y una amplia colección de juegos para todos los gustos.",
+        "price": 900000,
+        "stock": 30,
+        "brand": "Sony",
+        "category": "consolas",
+        "discount": 5,
+        "tags": ["popular", "classic", "discounts"],
+        "mainImage": "https://i.postimg.cc/mgmZ1KT7/ps4.png",
+        "quantity": 1
+      },
+      {
+        "id": 42,
+        "title": "Camiseta Sheldon Cooper",
+        "shortDescription": "Camiseta con diseño de Sheldon de The Big Bang Theory.",
+        "longDescription": "Camiseta con una de las frases icónicas de Sheldon Cooper, perfecta para fans de la serie.",
+        "price": 3500,
+        "stock": 50,
+        "brand": "TBBT",
+        "category": "ropa-y-accesorios",
+        "discount": 10,
+        "tags": ["tbbt", "sheldon"],
+        "mainImage": "https://i.postimg.cc/FzwszSv8/bazinga.png",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "userId": 2,
+    "createdAt": 1728649230000,
+    "items": [
+      {
+        "id": 43,
+        "title": "Mochila Harry Potter Hogwarts",
+        "shortDescription": "Mochila inspirada en la casa de Hogwarts.",
+        "longDescription": "Mochila de alta calidad con el escudo de la casa de Hogwarts, ideal para fans de Harry Potter.",
+        "price": 6000,
+        "stock": 30,
+        "brand": "Harry Potter",
+        "category": "ropa-y-accesorios",
+        "discount": 15,
+        "tags": ["harry-potter", "hogwarts"],
+        "mainImage": "https://i.postimg.cc/jq1jZpfc/mochilaharrypotter.png",
+        "quantity": 2
+      },
+      {
+        "id": 32,
+        "title": "Réplicas del Trono de Hierro",
+        "shortDescription": "Mini réplica del Trono de Hierro de Game of Thrones.",
+        "longDescription": "Una réplica en miniatura del famoso trono de la serie Game of Thrones, hecha en metal de alta calidad.",
+        "price": 30000,
+        "stock": 15,
+        "brand": "HBO",
+        "category": "coleccionables",
+        "discount": 15,
+        "tags": ["got", "replica"],
+        "mainImage": "https://i.postimg.cc/pV3FphsP/tronodehierro.png",
+        "quantity": 3
+      }
+    ]
+  }
+]
