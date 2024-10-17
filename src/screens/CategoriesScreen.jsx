@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, FlatList, Image,Pressable,useWindowDimensions }
 import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 import {useEffect,useState} from 'react'
+import { colors } from '../global/colors'
 
 const CategoriesScreen = ({navigation}) => {
     //console.log("Categories: ", categories)
@@ -46,11 +47,14 @@ const CategoriesScreen = ({navigation}) => {
 
 
     return (
+        <>
+        {/* <View style={styles.fixedExample}></View> */}
         <FlatList
             data={categories}
             keyExtractor={item => item.id}
             renderItem={renderCategoryItem}
         />
+        </>
     )
 }
 
@@ -81,7 +85,16 @@ const styles = StyleSheet.create({
     },
     rowReverse: {
         flexDirection: 'row-reverse'
-    }
+    },
+    /* fixedExample:{
+        width: 100,
+        height:100,
+        backgroundColor: colors.azulCobalto,
+        position: 'absolute',
+        zIndex:999,
+        bottom:10,
+        right: 10
+    } */
 })
 
 
