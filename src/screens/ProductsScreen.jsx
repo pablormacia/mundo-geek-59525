@@ -5,23 +5,21 @@ import FlatCard from '../components/FlatCard'
 import { colors } from '../global/colors'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Search from '../components/Search'
+import { useSelector } from 'react-redux'
 
 const ProductsScreen = ({ navigation, route }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
     const [search,setSearch] = useState("")
-    //console.log(search)
-    //console.log(route)
 
-    const category = route.params
+    //const category = route.params
+    const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
 
     useEffect(()=>{
-        const productsTempFiltered = products.filter(product=>product.category.toLowerCase() === category.toLowerCase())
-        setProductsFiltered(productsTempFiltered)
+        setProductsFiltered(productsFilteredByCategory)
         if(search){
-            const productsTempSearched = productsTempFiltered.filter(product=>product.title.toLowerCase().includes(search.toLowerCase()))
-            setProductsFiltered(productsTempSearched)
+            setProductsFiltered(productsFilteredByCategory.filter(product=>product.title.toLowerCase().includes(search.toLowerCase())))
         }
-    },[category,search])
+    },[search])
 
     const renderProductItem = ({ item }) => {
         return (
