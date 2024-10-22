@@ -6,6 +6,9 @@ import {useEffect,useState} from 'react'
 
 import TabNavigator from './src/navigation/TabNavigator';
 
+import { store } from './src/app/store';
+import { Provider } from 'react-redux';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
@@ -25,10 +28,10 @@ export default function App() {
   }
 
   return (
-    <>
+    <Provider store={store}>
       <TabNavigator />
       <StatusBar style="light" />
-    </>
+    </Provider>
   );
 }
 

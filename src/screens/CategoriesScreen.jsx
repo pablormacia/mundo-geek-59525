@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View, FlatList, Image,Pressable,useWindowDimensions } from 'react-native'
-import categories from "../data/categories.json"
+//import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 import {useEffect,useState} from 'react'
 import { colors } from '../global/colors'
+import { useSelector } from 'react-redux'
 
 const CategoriesScreen = ({navigation}) => {
     //console.log("Categories: ", categories)
@@ -10,6 +11,8 @@ const CategoriesScreen = ({navigation}) => {
     const [isPortrait, setIsPortrait] = useState(true)
     //console.log(width,height)
     //console.log(navigation)
+
+    const categories = useSelector(state=>state.shopSlice.categories)
 
     useEffect(()=>{
         if(width>height){
