@@ -1,0 +1,1 @@
+export const base_url = "https://mundo-geek-59525-default-rtdb.firebaseio.com/"

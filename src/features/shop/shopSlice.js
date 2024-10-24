@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import categories from '../../data/categories.json'
+//import categories from '../../data/categories.json'
 import products from '../../data/products.json'
 
 export const shopSlice = createSlice({
     name: 'shop',
     initialState: {
         value: {
-            categories: categories,
+            //categories: categories,
             products: products,
             categorySelected: "",
             productsFilteredByCategory:[],
@@ -15,7 +15,7 @@ export const shopSlice = createSlice({
     reducers: {
         setCategory: (state, action) => {
             state.value.productsFilteredByCategory = products.filter(product=>product.category.toLowerCase() === action.payload.toLowerCase())
-            state.categorySelected = action.payload
+            state.value.categorySelected = action.payload
         }
     }
 })

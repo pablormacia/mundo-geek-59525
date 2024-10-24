@@ -1,10 +1,11 @@
-import { StyleSheet, Text, View, FlatList, Image, Pressable, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, FlatList, Image, Pressable, useWindowDimensions, ActivityIndicator } from 'react-native'
 //import categories from "../data/categories.json"
 import FlatCard from '../components/FlatCard'
 import { useEffect, useState } from 'react'
 import { colors } from '../global/colors'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCategory } from '../features/shop/shopSlice'
+import { useGetCategoriesQuery } from '../services/shopService'
 
 const CategoriesScreen = ({ navigation }) => {
     //console.log("Categories: ", categories)
@@ -13,7 +14,9 @@ const CategoriesScreen = ({ navigation }) => {
     //console.log(width,height)
     //console.log(navigation)
 
-    const categories = useSelector(state => state.shopReducer.value.categories)
+    //const categories = useSelector(state => state.shopReducer.value.categories)
+
+    const { data: categories, error, isLoading } = useGetCategoriesQuery()
 
     const dispatch = useDispatch()
 
@@ -55,12 +58,21 @@ const CategoriesScreen = ({ navigation }) => {
 
     return (
         <>
-            {/* <View style={styles.fixedExample}></View> */}
-            <FlatList
+            {
+                isLoading
+                ?
+                <ActivityIndicator size="large" color={colors.verdeNeon} />
+                :
+                error
+                ?
+                <Text>Error al cargar las categorías</Text>
+                :
+                <FlatList
                 data={categories}
                 keyExtractor={item => item.id}
                 renderItem={renderCategoryItem}
             />
+            }
         </>
     )
 }
