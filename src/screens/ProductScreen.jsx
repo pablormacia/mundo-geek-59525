@@ -3,6 +3,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { colors } from '../global/colors';
 import products from '../data/products.json'
 import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { addItem } from '../features/cart/cartSlice';
 
 const ProductScreen = ({ route, navigation }) => {
     const [productFound, setProductFound] = useState({})
@@ -14,6 +16,8 @@ const ProductScreen = ({ route, navigation }) => {
     useEffect(() => {
         setProductFound(products.find(product => product.id === productId))
     }, [productId])
+
+    const dispatch = useDispatch()
 
     return (
         <ScrollView style={styles.productContainer}>
@@ -50,10 +54,10 @@ const ProductScreen = ({ route, navigation }) => {
                 productFound.stock <= 0 && <Text style={styles.noStockText}>Sin Stock</Text>
             }
             <Text style={styles.price}>Precio: $ {productFound.price}</Text>
-            <Pressable 
-                style={({ pressed }) => [{ opacity: pressed ? 0.95 : 1 },styles.addToCartButton]}
+            <Pressable
+                style={({ pressed }) => [{ opacity: pressed ? 0.95 : 1 }, styles.addToCartButton]}
                 //style={styles.addToCartButton} 
-                onPress={null}>
+                onPress={() => dispatch(addItem({ ...productFound, quantity: 1 }))}>
                 <Text style={styles.textAddToCart}>Agregar al carrito</Text>
             </Pressable>
         </ScrollView>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
         gap: 5,
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginVertical:8
+        marginVertical: 8
     },
     tags: {
         flexDirection: 'row',
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     discount: {
         backgroundColor: colors.naranjaBrillante,
         width: 64,
-        height:64,
+        height: 64,
         //padding: 8,
         borderRadius: 64,
         //alignSelf: 'flex-start',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
         /* position:'absolute',
         top:16,
         left: 16, */
-        textAlign:'center',
+        textAlign: 'center',
         verticalAlign: 'center'
     },
     noStockText: {
