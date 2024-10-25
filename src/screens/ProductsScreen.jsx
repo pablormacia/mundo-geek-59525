@@ -5,8 +5,9 @@ import FlatCard from '../components/FlatCard'
 import { colors } from '../global/colors'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Search from '../components/Search'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
 import { useGetProductsByCategoryQuery } from '../services/shopService'
+import { setProductId } from '../features/shop/shopSlice'
 
 const ProductsScreen = ({ navigation, route }) => {
     const [productsFiltered, setProductsFiltered] = useState([])
@@ -16,9 +17,11 @@ const ProductsScreen = ({ navigation, route }) => {
     //const productsFilteredByCategory = useSelector(state=>state.shopReducer.value.productsFilteredByCategory)
 
     const category = useSelector(state => state.shopReducer.value.categorySelected)
-    console.log("Category:", category)
+    //console.log("Category:", category)
 
     const { data: productsFilteredByCategory, error, isLoading } = useGetProductsByCategoryQuery(category)
+
+    dispatch = useDispatch()
 
     //console.log("Products filtered:", productsFilteredByCategory)
     useEffect(() => {
@@ -26,11 +29,14 @@ const ProductsScreen = ({ navigation, route }) => {
         if (search) {
             setProductsFiltered(productsFilteredByCategory.filter(product => product.title.toLowerCase().includes(search.toLowerCase())))
         }
-    }, [search])
+    }, [search,productsFilteredByCategory])
 
     const renderProductItem = ({ item }) => {
         return (
-            <Pressable onPress={() => navigation.navigate("Producto", item.id)}>
+            <Pressable onPress={() => {
+                dispatch(setProductId(item.id))
+                navigation.navigate("Producto")
+                }}>
                 <FlatCard style={styles.productContainer}>
                     <View>
                         <Image
