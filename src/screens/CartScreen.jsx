@@ -15,6 +15,9 @@ const CartScreen = ({navigation}) => {
     const total = useSelector(state=>state.cartReducer.value.total)
     const [triggerPost, result] = usePostReceiptMutation()
 
+    const cartLength = useSelector(state=>state.cartReducer.value.cartLenght)
+    console.log(cartLength)
+
     const dispatch = useDispatch()
 
     const FooterComponent = () => (
@@ -51,6 +54,10 @@ const CartScreen = ({navigation}) => {
     )
 
     return (
+        <>
+        {
+        cartLength>0
+        ?
         <FlatList
             data={cart}
             keyExtractor={item => item.id}
@@ -58,6 +65,10 @@ const CartScreen = ({navigation}) => {
             ListHeaderComponent={<Text style={styles.cartScreenTitle}>Tu carrito:</Text>}
             ListFooterComponent={<FooterComponent />}
         />
+        :
+        <View style={styles.cartEmpty}><Text style={styles.cartEmptyText} >Aún no hay productos en el carrito</Text></View>
+        }
+        </>
     )
 }
 
@@ -122,6 +133,14 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: "center",
         paddingVertical: 8
+    },
+    cartEmpty:{
+        flex:1,
+        justifyContent:'center',
+        alignItems: 'center'
+    },
+    cartEmptyText:{
+        fontSize: 16
     }
 
 })

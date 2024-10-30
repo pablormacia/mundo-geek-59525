@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, TextInput, Pressable, Dimensions } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { colors } from '../global/colors';
+import { colors } from '../../global/colors'
 import { useState, useEffect } from 'react';
-import { useSignupMutation } from '../services/authService';
-import { setUser } from '../features/auth/authSlice';
+import { useSignupMutation } from '../../services/authService';
+import { setUser } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
-const SignupScreen = () => {
+const SignupScreen = ({navigation}) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -64,7 +64,7 @@ const SignupScreen = () => {
                 />
             </View>
             <View style={styles.footTextContainer}>
-                <Text style={styles.whiteText}>¿No tienes una cuenta?</Text>
+                <Text style={styles.whiteText}>¿Ya tienes una cuenta?</Text>
                 <Pressable onPress={() => navigation.navigate('Login')}>
                     <Text style={
                         {
@@ -72,7 +72,7 @@ const SignupScreen = () => {
                             ...styles.underLineText
                         }
                     }>
-                        Crea una
+                        Iniciar sesión
                     </Text>
                 </Pressable>
             </View>
@@ -81,7 +81,9 @@ const SignupScreen = () => {
 
             <View style={styles.guestOptionContainer}>
                 <Text style={styles.whiteText}>¿Solo quieres dar un vistazo?</Text>
-                <Pressable><Text style={{ ...styles.whiteText, ...styles.strongText }}>Ingresa como invitado</Text></Pressable>
+                <Pressable onPress={()=>dispatch(setUser({email:"demo@mundogeek.com",token:"demo"}))}>
+                    <Text style={{ ...styles.whiteText, ...styles.strongText }}>Ingresa como invitado</Text>
+                </Pressable>
             </View>
         </LinearGradient>
     )
