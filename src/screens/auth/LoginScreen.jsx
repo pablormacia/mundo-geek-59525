@@ -39,7 +39,7 @@ const LoginScreen = ({navigation}) => {
             style={styles.gradient}
         >
             <Text style={styles.title}>Mundo Geek</Text>
-            <Text style={styles.subTitle}>Registrate</Text>
+            <Text style={styles.subTitle}>Ingresa</Text>
             <View style={styles.inputContainer}>
                 <TextInput
                     onChangeText={(text) => setEmail(text)}

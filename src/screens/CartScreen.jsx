@@ -16,7 +16,7 @@ const CartScreen = ({navigation}) => {
     const [triggerPost, result] = usePostReceiptMutation()
 
     const cartLength = useSelector(state=>state.cartReducer.value.cartLenght)
-    console.log(cartLength)
+    //console.log(cartLength)
 
     const dispatch = useDispatch()
 

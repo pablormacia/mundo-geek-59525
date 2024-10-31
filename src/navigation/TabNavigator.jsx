@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import ShopNavigator from "./ShopNavigator";
 import CartNavigator from "./CartNavigator";
 import ReceiptsNavigator from "./ReceiptsNavigator";
+import ProfileNavigator from "./ProfileNavigator";
 import { colors } from "../global/colors";
 
 
@@ -42,6 +43,14 @@ const TabNavigator = () => {
                     tabBarIcon: ({focused})=>(<Icon name="receipt-long" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
                 }}
             />
+            <Tab.Screen 
+                name="Profile"
+                component={ProfileNavigator} 
+                options={{
+                    tabBarIcon: ({focused})=>(<Icon name="account-circle" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
+                }}
+            />
+            
         </Tab.Navigator>
   )
 }
