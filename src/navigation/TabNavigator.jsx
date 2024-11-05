@@ -7,6 +7,7 @@ import ShopNavigator from "./ShopNavigator";
 import CartNavigator from "./CartNavigator";
 import ReceiptsNavigator from "./ReceiptsNavigator";
 import ProfileNavigator from "./ProfileNavigator";
+import MyPlacesNavigator from "./MyPlacesNavigator";
 import { colors } from "../global/colors";
 
 
@@ -50,7 +51,13 @@ const TabNavigator = () => {
                     tabBarIcon: ({focused})=>(<Icon name="account-circle" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
                 }}
             />
-            
+            <Tab.Screen 
+                name="Places"
+                component={MyPlacesNavigator} 
+                options={{
+                    tabBarIcon: ({focused})=>(<Icon name="location-on" size={32} color={focused?colors.grisOscuro:colors.grisMedio} />)
+                }}
+            />
         </Tab.Navigator>
   )
 }
