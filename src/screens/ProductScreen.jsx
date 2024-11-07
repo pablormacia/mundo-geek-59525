@@ -13,7 +13,7 @@ const ProductScreen = ({ route, navigation }) => {
 
     //const productId = route.params
     const productId = useSelector(state=>state.shopReducer.value.productId)
-    console.log(productId)
+    //console.log(productId)
 
     const { width, height } = useWindowDimensions()
 

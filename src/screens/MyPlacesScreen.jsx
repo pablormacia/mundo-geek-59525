@@ -81,7 +81,7 @@ const MyPlacesScreen = () => {
                 setErrorMsg('Error getting location');
                 showToast("error", "No se pudo obtener la ubicación")
             }
-            console.log(location.coords)
+            //console.log(location.coords)
             setLocation(location.coords);
         }
     }

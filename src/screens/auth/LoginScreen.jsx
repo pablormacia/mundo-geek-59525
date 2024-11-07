@@ -47,6 +47,7 @@ const LoginScreen = ({navigation}) => {
           
           if (rememberMe) {
             clearSessions().then(() => console.log("sesiones eliminadas")).catch(error => console.log("Error al eliminar las sesiones: ", error))
+            console.log("result data:", result.data)
             insertSession({
               localId: result.data.localId,
               email: result.data.email,
