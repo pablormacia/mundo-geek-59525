@@ -5,32 +5,64 @@ import { useState, useEffect } from 'react';
 import { useSignupMutation } from '../../services/authService';
 import { setUser } from '../../features/auth/authSlice';
 import { useDispatch } from 'react-redux';
+import { validationSchema } from '../../validations/validationSchema';
 
 const textInputWidth = Dimensions.get('window').width * 0.7
 
-const SignupScreen = ({navigation}) => {
+const SignupScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
+    const [errorEmail, setErrorEmail] = useState("")
+    const [errorPassword, setErrorPassword] = useState("")
+    const [errorConfirmPassword, setErrorConfirmPassword] = useState("")
+    const [genericValidationError, setGenericValidationError] = useState("")
+    const [errorAddUser,setErrorAddUser] = useState(false)
+
     const [triggerSignup, result] = useSignupMutation()
 
     const dispatch = useDispatch()
 
-    useEffect(()=>{
-        if(result.status==="rejected"){
+    useEffect(() => {
+        if (result.status === "rejected") {
             console.log("Error al agregar el usuario", result)
-        }else if(result.status==="fulfilled"){
+            setErrorAddUser("Ups! No se pudo agregar el usuario")
+        } else if (result.status === "fulfilled") {
             console.log("Usuario agregado con éxito")
             //console.log(result.data)
             dispatch(setUser(result.data))
         }
-    },[result])
+    }, [result])
 
-    const onsubmit = ()=>{
+    const onsubmit = () => {
         //console.log(email,password,confirmPassword)
-        triggerSignup({email,password})
+        try {
+            validationSchema.validateSync({ email, password, confirmPassword })
+            setErrorEmail("")
+            setErrorPassword("")
+            setErrorConfirmPassword("")
+            triggerSignup({ email, password })
+        } catch (error) {
+            switch (error.path) {
+                case "email":
+                    console.log(error.message)
+                    setErrorEmail(error.message)
+                    break
+                case "password":
+                    console.log(error.message)
+                    setErrorPassword(error.message)
+                    break
+                case "confirmPassword":
+                    console.log(error.message)
+                    setErrorConfirmPassword(error.message)
+                    break
+                default:
+                    setGenericValidationError(error.message)
+                    break
+            }
+        }
     }
 
     return (
@@ -49,6 +81,7 @@ const SignupScreen = ({navigation}) => {
                     placeholder="Email"
                     style={styles.textInput}
                 />
+                {(errorEmail && !errorPassword) && <Text style={styles.error}>{errorEmail}</Text>}
                 <TextInput
                     onChangeText={(text) => setPassword(text)}
                     placeholderTextColor="#EBEBEB"
@@ -56,6 +89,7 @@ const SignupScreen = ({navigation}) => {
                     style={styles.textInput}
                     secureTextEntry
                 />
+                 {errorPassword && <Text style={styles.error}>{errorPassword}</Text>}
                 <TextInput
                     onChangeText={(text) => setConfirmPassword(text)}
                     placeholderTextColor="#EBEBEB"
@@ -63,6 +97,7 @@ const SignupScreen = ({navigation}) => {
                     style={styles.textInput}
                     secureTextEntry
                 />
+                 {errorConfirmPassword && <Text style={styles.error}>{errorConfirmPassword}</Text>}
             </View>
             <View style={styles.footTextContainer}>
                 <Text style={styles.whiteText}>¿Ya tienes una cuenta?</Text>
@@ -79,10 +114,10 @@ const SignupScreen = ({navigation}) => {
             </View>
 
             <Pressable style={styles.btn} onPress={onsubmit}><Text style={styles.btnText}>Crear cuenta</Text></Pressable>
-
+            {errorAddUser && <Text style={styles.error}>{errorAddUser}</Text>}
             <View style={styles.guestOptionContainer}>
                 <Text style={styles.whiteText}>¿Solo quieres dar un vistazo?</Text>
-                <Pressable onPress={()=>dispatch(setUser({email:"demo@mundogeek.com",token:"demo"}))}>
+                <Pressable onPress={() => dispatch(setUser({ email: "demo@mundogeek.com", token: "demo" }))}>
                     <Text style={{ ...styles.whiteText, ...styles.strongText }}>Ingresa como invitado</Text>
                 </Pressable>
             </View>
@@ -154,5 +189,8 @@ const styles = StyleSheet.create({
     guestOptionContainer: {
         alignItems: 'center',
         marginTop: 64
-    }
+    },
+    error: {
+        color: colors.naranjaBrillante
+      }
 })
