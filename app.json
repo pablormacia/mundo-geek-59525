@@ -17,13 +17,23 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "icon": "./assets/icon.png",
+      "package": "com.pablormacia.mundogeek59525",
+      "config": {
+        "googleMaps": {
+          "apiKey": ""
+        }
       }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "de85989d-a007-4fa2-ac39-070ac22b646c"
+      }
+    },
+    "owner": "pablormacia"
   }
 }
